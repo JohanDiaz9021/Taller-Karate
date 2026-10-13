@@ -116,9 +116,9 @@ jobs:
         id: issue_info
         run: |
           tag="${{ env.tag }}"
-          # Extraer Issue-X del tag (ej: @Issue-2 → 2)
-          if [[ $tag =~ Issue-([0-9]+) ]]; then
-            issue_number="${BASH_REMATCH[1]}"
+          # Extraer el número del issue del tag (ej: @Issue-2 → 2, @GH-1 → 1)
+          if [[ $tag =~ (Issue|GH)-([0-9]+) ]]; then
+            issue_number="${BASH_REMATCH[2]}"
             echo "issue_number=$issue_number" >> $GITHUB_OUTPUT
             echo "Found Issue #$issue_number from tag '$tag'"
           else
